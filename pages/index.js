@@ -9,6 +9,10 @@ function Home() {
   const { user } = useAuth();
   const [myUser, setMyUser] = useState();
 
+  const onUpdate = () => {
+    checkUser(user.uid).then((data) => setMyUser(data[0]));
+  };
+
   useEffect(() => {
     checkUser(user.uid).then((data) => setMyUser(data[0]));
     console.warn('thisUser', myUser);
@@ -33,7 +37,7 @@ function Home() {
             Sign Out
           </Button>
         </div>
-      ) : (<RegisterForm user={user} />)}
+      ) : (<RegisterForm user={user} onUpdate={onUpdate} />)}
     </>
   );
 }
